@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Course from "./Pages/Course";
+import Navbar from "./Components/Navbar";
+import { Toaster } from "react-hot-toast";
+import Auth from "./Components/Auth";
+import AllRoute from "./Pages/AllRoute";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [userpic, setuserpic] = useState(false)
+  useEffect(() => {
+    let pic = localStorage.getItem("pictures")
+    if (pic) {
+      setuserpic(pic);
+    }
+    else{
+      setuserpic(false);
+    }
+  }, [])
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar userpic={userpic} setuserpic = {setuserpic}/>
+     <AllRoute setuserpic={setuserpic}/>
+      <Toaster />
     </div>
   );
 }
